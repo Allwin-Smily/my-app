@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
-
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
@@ -15,22 +14,8 @@ import Select from '@mui/material/Select';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 
-// import { makeStyles } from '@mui/styles';
-
-// const useStyles = makeStyles((theme) => ({
-//     secondary: {
-//         backgroundColor: '#21B6A8',
-//     },
-// }));
-
 export default function PopContent() {
 
-  // const classes = useStyles();
-  // const [open, setOpen] = React.useState(false);
-
-  // const toggleDrawer = (newOpen) => () => {
-  //   setOpen(newOpen);
-  // };
   const options = [
     { value: 'first_name', label: 'First Name' },
     { value: 'last_name', label: 'Last Name' },
@@ -41,13 +26,10 @@ export default function PopContent() {
     { value: 'state', label: 'State' },
   ];
 
-  const ITEM_HEIGHT = 48;
-  const ITEM_PADDING_TOP = 8;
-
   const MenuProps = {
     PaperProps: {
       style: {
-        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        maxHeight: 48 * 4.5 + 8,
         width: 250,
       },
     },
@@ -77,8 +59,20 @@ export default function PopContent() {
     setSegmentName(event.target.value);
   };
 
-  const submitHandle = (values) => {
-    values.preventDefault();
+  const submitHandle = (e) => {
+    e.preventDefault();
+    // fetch('https://webhook.site/4e4bfbac-499e-4d56-a1ea-0fc36bc6ed71', {
+    //   method: "POST",
+    //   headers: {
+    //     'Content-type': 'application/json'
+    //   },
+    //   body: JSON.stringify(e)
+    // })
+    // .then((response) => response.json())
+    // .then((result) => {
+    //   console.log("result");
+    //   console.log(result);
+    // })
     console.log(segmentName);
     console.log(fieldsName);
   }
