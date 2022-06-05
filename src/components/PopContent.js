@@ -61,20 +61,28 @@ export default function PopContent() {
 
   const submitHandle = (e) => {
     e.preventDefault();
-    // fetch('https://webhook.site/4e4bfbac-499e-4d56-a1ea-0fc36bc6ed71', {
-    //   method: "POST",
-    //   headers: {
-    //     'Content-type': 'application/json'
-    //   },
-    //   body: JSON.stringify(e)
-    // })
-    // .then((response) => response.json())
-    // .then((result) => {
-    //   console.log("result");
-    //   console.log(result);
-    // })
-    console.log(segmentName);
     console.log(fieldsName);
+    const fieldSegment = {
+        'schema': [],
+        'segment_name': segmentName
+      };
+     fieldsName.forEach((fieldNames, i) => {
+      const value = fieldNames.fieldName;
+      fieldSegment.schema.push(value);
+      console.log('Array after push : '+ value);
+    });
+    console.log(fieldSegment);
+     fetch('https://webhook.site/4e4bfbac-499e-4d56-a1ea-0fc36bc6ed71', {
+      method: "POST",
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(fieldSegment)
+    })
+    .then((response) => response.json())
+    .then((result) => {
+      console.log(result);
+    });
   }
 
   return (
@@ -108,7 +116,7 @@ export default function PopContent() {
             labelId="select"
             defaultValue = ''
             // value={segmentName}
-            name={data.fieldName}
+            name="fieldName"
             onChange={event => handleChange(index, event)}
             label="Add Schema to Segment"
             MenuProps={MenuProps}
