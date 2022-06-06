@@ -37,10 +37,11 @@ export default function PopContent() {
 
   const [segmentName, setSegmentName] = React.useState('');
   const [fieldsName, setFieldsName] = React.useState([{fieldName: ''}]);
+  const [optionsName, setOptionsName] = React.useState(options);
 
   const handleAddFields = () => {
     let newfield = { fieldName: '' }
-    setFieldsName([...fieldsName, newfield])
+    setFieldsName([...fieldsName, newfield]);
   };
 
   const handleRemoveFields = (index) => {
@@ -52,8 +53,13 @@ export default function PopContent() {
   const handleChange = (index, event) => {
     let data = [...fieldsName];
     data[index][event.target.name] = event.target.value;
+    console.log(data);
     setFieldsName(data);
- }
+    // let option = [...optionsName];
+    // const index1 = option.map(item => item.value).indexOf(event.target.value);
+    // option.splice(index1, 1);
+    // setOptionsName(option);
+  }
 
   const handleSegmentNameChange = (event) => {
     setSegmentName(event.target.value);
@@ -66,10 +72,9 @@ export default function PopContent() {
         'schema': [],
         'segment_name': segmentName
       };
-     fieldsName.forEach((fieldNames, i) => {
+    fieldsName.forEach((fieldNames, i) => {
       const value = fieldNames.fieldName;
       fieldSegment.schema.push(value);
-      console.log('Array after push : '+ value);
     });
     console.log(fieldSegment);
      fetch('https://webhook.site/4e4bfbac-499e-4d56-a1ea-0fc36bc6ed71', {
@@ -115,14 +120,14 @@ export default function PopContent() {
             id="select"
             labelId="select"
             defaultValue = ''
-            // value={segmentName}
+            value={data.fieldName}
             name="fieldName"
-            onChange={event => handleChange(index, event)}
+            onChange={(event) => handleChange(index, event)}
             label="Add Schema to Segment"
             MenuProps={MenuProps}
             sx={{ width: 300 }}
           >
-            {options.map((option, index) => (
+            {optionsName.map((option, index) => (
               <MenuItem
                 key={index}
                 value={option.value}
